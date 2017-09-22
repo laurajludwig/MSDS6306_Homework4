@@ -1,0 +1,35 @@
+---
+title: "DataExplanation"
+author: "Laura Ludwig"
+date: "September 21 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(root.dir = "C:/proj/MSDS6306/MSDS6306_Homework4/")
+```
+## Initial Plots
+
+There appear to be a lot of zeroes in our data for sale price (indicating that no sales took place. We adjusted our variable to remove those.
+
+After the true sales are isolated, we plot the sales price vs the gross square footage, and we see a lot of clustering around the origin, indicating that transformation on both variables may prove valuable.
+
+```{r nontransplot, echo=FALSE}
+plot(bk.sale$gross.sqft,bk.sale$sale.price.n)
+```
+
+The transformed data is much more spread out. 
+
+```{r transplot, echo=FALSE}
+plot(log10(bk.sale$gross.sqft),log10(bk.sale$sale.price.n))
+```
+
+## Final Outlier Removal
+
+In the charts above, it seems like there are still some records that do not reflect actual sales. We expect that home sales should be at least $100,000. We remove these as outliers, particularly since they appear in strata in our graph. There is potentially something else going on with these data points that is not reflective of home prices. 
+
+```{r finalclean, echo=FALSE}
+plot(log10(bk.homes$gross.sqft),log10(bk.homes$sale.price.n))
+```
+
+Once we have done this cleaning and removed suspicious outliers, we have this representation of the relationship between log of sales price and log of the gross square footage.
